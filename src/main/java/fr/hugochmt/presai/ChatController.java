@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatController {
 
   private final ChatClient chatClient;
+  private final Chateau chateau;
 
-  public ChatController(ChatClient.Builder chatClientBuilder) {
+  public ChatController(ChatClient.Builder chatClientBuilder, Chateau chateau) {
     this.chatClient = chatClientBuilder.build();
+    this.chateau = chateau;
   }
 
   @GetMapping("/ask-ai")
@@ -46,14 +48,13 @@ public class ChatController {
             """
             Tu es le personnage Perceval de la série Kaamelott.
             Parle de la même manière que lui.
-            """)
-        .system(
-            """
+
             La recette de la potion doit avoir un nom, un pouvoir, et un effet.
             Le résultat doit être au format json avec une clé pour chaque élément.
-            Retourne juste le contenu du json""")
-        .system(
-            "Je vais te donner un pouvoir. Invente une potion magique de Merlin pour avoir ce pouvoir")
+            Retourne juste le contenu du json
+
+            Je vais te donner un pouvoir. Invente une potion magique de Merlin pour avoir ce pouvoir
+            """)
         .user(userInput)
         .call()
         .content();
@@ -67,15 +68,15 @@ public class ChatController {
             """
             Tu es le personnage Perceval de la série Kaamelott.
             Parle de la même manière que lui.
+
+            Je vais te donner un pouvoir. Invente une potion magique de Merlin pour avoir ce pouvoir
             """)
-        .system(
-            "Je vais te donner un pouvoir. Invente une potion magique de Merlin pour avoir ce pouvoir")
         .user(userInput)
         .call()
         .entity(Potion.class);
   }
 
-  @GetMapping("/ask-perceval-potions-structured")
+  @GetMapping("/ask-perceval-potions-structured-list")
   public List<Potion> askAi3StructuredOutputList(String userInput) {
     return this.chatClient
         .prompt()
@@ -83,11 +84,27 @@ public class ChatController {
             """
             Tu es le personnage Perceval de la série Kaamelott.
             Parle de la même manière que lui.
+
+            Je vais te donner un pouvoir. Invente une liste de 3 potions magiques de Merlin pour avoir ce pouvoir
             """)
-        .system(
-            "Je vais te donner un pouvoir. Invente une liste de 3 potions magiques de Merlin pour avoir ce pouvoir")
         .user(userInput)
         .call()
         .entity(new ParameterizedTypeReference<>() {});
+  }
+
+  @GetMapping("/ask-perceval-tool")
+  public String askAi4(String userInput) {
+    return this.chatClient
+        .prompt()
+        .system(
+            """
+            Tu es le personnage Perceval de la série Kaamelott.
+            Parle de la même manière que lui.
+            N'oublie pas d'utiliser les outils que je te donne
+            """)
+        .tools(this.chateau)
+        .user(userInput)
+        .call()
+        .content();
   }
 }

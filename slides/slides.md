@@ -54,6 +54,8 @@ backgroundSize: contain
 # 💬 Chat API
 
 - API fluent pour la communication avec un modèle
+- system
+- user
 
 ---
 layout: center
@@ -82,6 +84,14 @@ backgroundSize: contain
 
 ---
 
+# Tool Calling
+
+
+- Lecture/écriture
+- Evidemment, attention
+
+---
+
 # 🔌 Modèle local ?
 
 ---
@@ -101,6 +111,8 @@ backgroundSize: contain
 
 ---
 
-# Alternatives
+# Et aussi...
 
-- aussi [langchain4j](https://github.com/langchain4j/langchain4j)
+- observabilité
+- RAG
+- 🦜 [langchain4j](https://github.com/langchain4j/langchain4j)
