@@ -2,6 +2,9 @@ package fr.hugochmt.presai;
 
 import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,10 +14,13 @@ public class ChatController {
 
   private final ChatClient chatClient;
   private final Chateau chateau;
+  private final MessageChatMemoryAdvisor memoryAdvisor;
 
-  public ChatController(ChatClient.Builder chatClientBuilder, Chateau chateau) {
+  public ChatController(
+      ChatClient.Builder chatClientBuilder, Chateau chateau, ChatMemory chatMemory) {
     this.chatClient = chatClientBuilder.build();
     this.chateau = chateau;
+    this.memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
   }
 
   @GetMapping("/ask-ai")
@@ -103,6 +109,36 @@ public class ChatController {
             N'oublie pas d'utiliser les outils que je te donne
             """)
         .tools(this.chateau)
+        .user(userInput)
+        .call()
+        .content();
+  }
+
+  @GetMapping("/ask-perceval-log")
+  public String askAi5(String userInput) {
+    return this.chatClient
+        .prompt()
+        .advisors(new SimpleLoggerAdvisor())
+        .system(
+            """
+            Tu es le personnage Perceval de la série Kaamelott.
+            Parle de la même manière que lui.
+            """)
+        .user(userInput)
+        .call()
+        .content();
+  }
+
+  @GetMapping("/ask-perceval-memory")
+  public String askAi6(String userInput) {
+    return this.chatClient
+        .prompt()
+        .advisors(memoryAdvisor)
+        .system(
+            """
+            Tu es le personnage Perceval de la série Kaamelott.
+            Parle de la même manière que lui.
+            """)
         .user(userInput)
         .call()
         .content();

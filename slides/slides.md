@@ -92,6 +92,17 @@ backgroundSize: contain
 
 ---
 
+#  Mémoire
+
+
+---
+
+# Monitoring
+
+- SimpleLoggerAdvisor
+
+---
+
 # 🔌 Modèle local ?
 
 ---
