@@ -42,6 +42,7 @@ backgroundSize: contain
 
 - Module pour l'IA Générative
 - Support multi-providers : OpenAI, Google, Mistral, Ollama ...
+- Support multi-modèles
 - Features
     - ChatAPI
     - Tools calling
@@ -104,6 +105,8 @@ backgroundSize: contain
 ---
 
 # 🔌 Modèle local ?
+
+- Possibilité to auto-pull model
 
 ---
 
