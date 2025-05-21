@@ -23,8 +23,15 @@ public class LocalChatController {
     return this.chatClient
         .prompt()
         .system(
-            "Classify the provided character. If the character is a bad guy return 'BAD_GUY', if it is the good guy in many stories return 'GOOD_GUY'")
-        .user(userInput)
+            """
+        Classify the text into neutral, negative or positive.
+        """)
+        .user(
+            """
+        Text : %s
+        Sentiment :
+        """
+                .formatted(userInput))
         .call()
         .content();
   }
