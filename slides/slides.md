@@ -9,6 +9,7 @@ image: resources/img/bg.png
 ---
 
 # **Spring AI**
+
 ### Faire discuter son application avec un LLM
 
 ---
@@ -20,17 +21,68 @@ layout: intro
 
 <Toc/>
 
+
 ---
 
-# 📖 Quelques définitions
+# Contexte
 
-- LLM
-- Modèle
--
+- Essor de l'utilisation des IAs génératives depuis quelques années (ChatGPT, Claude, Midjourney ...)
+- Révolution du prompt ➡ on peut définir sa demande en langage naturel
+- Lancement de frameworks et librairies pour faciliter l'utilisation des LLMs, autour des APIs OpenAI, Google, etc.
+
+---
+
+# Quelques définitions
+
+### **🧠 Modèle**
+
+- Un modèle est un programme d’intelligence artificielle qui a appris à accomplir une tâche à partir de données
+- Exemple : comprendre du texte, générer des réponses, traduire ...
+
+### **🗣️ LLM (Large Language Model)**
+
+- Modèle de langage de très grande taille, entraîné sur d’immenses volumes de textes pour comprendre et générer du
+  langage naturel.
+- Exemple : GPT-3, GPT-4, Mistral_7B (ChatGPT ≠ GPT-3)
+
+---
+
+### **📝 Prompt**
+
+- Texte que l’on envoie au modèle pour qu’il fasse quelque chose.
+- Exemple :
+
+```bash
+  Prompt : "Écris une courte histoire sur un chat qui vole."
+  Réponse du modèle : "Il était une fois un chat qui avait des ailes argentées..."
+```
+
+### **📁 Context / Contexte**
+
+Ensemble d’informations fournies au modèle au moment où il doit générer une réponse.
+- Le contexte est stateless → chaque requête doit inclure les infos utiles.
+- Peut inclure : historique de conversation, documents, rôle utilisateur, etc.
+
+---
+
+# Mais aussi
+
+### **🧩 Token**
+
+- Un token est une unité de texte comprise par un modèle. Ce n’est pas forcément un mot entier : cela peut être un
+  morceau de mot, une ponctuation, etc.
+
+### **🌡️ Température**
+
+- La température est un paramètre qui contrôle le degré de créativité ou de randomness dans la génération de texte par
+  un modèle de langage.
 
 ---
 
 # Disclaimer
+
+- Ceci n'est pas une presentation sur le fonctionnement de l'IA
+- Domaine qui évolue vite (obsolescence, nouvelles technologies, ...)
 
 ---
 layout: image-right
@@ -48,7 +100,7 @@ backgroundSize: contain
     - Tools calling
     - MCP
     - ...
-- ⚠ v1.0.0-RC1
+- v1.0.0 mai 2025
 
 ---
 
@@ -81,20 +133,18 @@ backgroundSize: contain
 - Pas besoin de fournir le modèle en entrée (spring le fait pour nous)
 - Permet de mapper le résultat vers un objet typé
 - Possibilité d'implémenter des converter custom
-- ⚠ tente de peupler l'objet quoi qu'il arrive (pas d'exception lancée) prévoir des fallback
+- ⚠ Tente de peupler l'objet quoi qu'il arrive (pas d'exception lancée) prévoir des fallback
 
 ---
 
 # Tool Calling
-
 
 - Lecture/écriture
 - Evidemment, attention
 
 ---
 
-#  Mémoire
-
+# Mémoire
 
 ---
 
@@ -104,13 +154,20 @@ backgroundSize: contain
 
 ---
 
-# 🔌 Modèle local ?
+# 🦙 Ollama
 
-- Possibilité to auto-pull model
+- Le docker des LLMs
+- Modèles sur Hugging Face
+- Intégration avec Spring AI
+- Possibilité de auto-pull model
+- ⚠ Certains modèles peuvent mal supporter les structured output
 
 ---
 
 # 🛡 Sécurité
+
+- protection de prompt
+-
 
 ---
 
@@ -118,10 +175,8 @@ backgroundSize: contain
 
 - Chat bot, aide utilisateur
 - Classification de données
-
-
-
-
+- Recherche sémantique
+- ...
 
 ---
 
@@ -129,4 +184,5 @@ backgroundSize: contain
 
 - observabilité
 - RAG
+- MCP Model Context Protocol
 - 🦜 [langchain4j](https://github.com/langchain4j/langchain4j)
