@@ -155,13 +155,24 @@ backgroundSize: contain
 ---
 
 # 🦙 Ollama
+> Docker for LLMs
 
-- Le docker des LLMs
 - Modèles sur Hugging Face
 - Intégration avec Spring AI
 - Possibilité de auto-pull model
 - ⚠ Certains modèles peuvent mal supporter les structured output
 - Docker Model Runner
+
+
+---
+
+# ᯤ MCP
+- > Like an USB port for AI applications
+- Protocole pour fournir du contexte
+- SDK multi-langage (Java, TypeScript, Python ...)
+- Fetch page web, API, file system, bases de données...
+
+
 
 ---
 
