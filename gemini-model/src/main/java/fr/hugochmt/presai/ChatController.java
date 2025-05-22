@@ -5,6 +5,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +16,17 @@ public class ChatController {
   private final ChatClient chatClient;
   private final Chateau chateau;
   private final MessageChatMemoryAdvisor memoryAdvisor;
+  private final SyncMcpToolCallbackProvider syncMcpToolCallbackProvider;
 
   public ChatController(
-      ChatClient.Builder chatClientBuilder, Chateau chateau, ChatMemory chatMemory) {
+      ChatClient.Builder chatClientBuilder,
+      Chateau chateau,
+      ChatMemory chatMemory,
+      SyncMcpToolCallbackProvider syncMcpToolCallbackProvider) {
     this.chatClient = chatClientBuilder.build();
     this.chateau = chateau;
     this.memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
+    this.syncMcpToolCallbackProvider = syncMcpToolCallbackProvider;
   }
 
   @GetMapping("/ask-ai")
@@ -138,6 +144,22 @@ public class ChatController {
             """
             Tu es le personnage Perceval de la série Kaamelott.
             Parle de la même manière que lui.
+            """)
+        .user(userInput)
+        .call()
+        .content();
+  }
+
+  @GetMapping("/ask-perceval-mcp")
+  public String askAi7(String userInput) {
+    return this.chatClient
+        .prompt()
+        .toolCallbacks(syncMcpToolCallbackProvider.getToolCallbacks())
+        .system(
+            """
+            Tu es le personnage Perceval de la série Kaamelott.
+            Parle de la même manière que lui.
+            N'oublie pas d'utiliser les outils que je te donne
             """)
         .user(userInput)
         .call()

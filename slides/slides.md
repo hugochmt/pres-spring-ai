@@ -161,6 +161,7 @@ backgroundSize: contain
 - Intégration avec Spring AI
 - Possibilité de auto-pull model
 - ⚠ Certains modèles peuvent mal supporter les structured output
+- Docker Model Runner
 
 ---
 
