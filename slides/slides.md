@@ -5,6 +5,7 @@ layout: image-right
 backgroundSize: 90%
 fonts:
   sans: 'Montserrat'
+  mono: 'JetBrains Mono'
 image: resources/img/bg.png
 ---
 
@@ -26,7 +27,7 @@ layout: intro
 
 # Contexte
 
-- Essor de l'utilisation des IAs génératives depuis quelques années (ChatGPT, Claude, Midjourney ...)
+- Essor de l'utilisation des IAs génératives depuis 2023 (ChatGPT, Claude, Midjourney ...)
 - Révolution du prompt : on peut définir sa demande en langage naturel
 - Lancement de frameworks et librairies pour faciliter l'utilisation des LLMs, autour des APIs OpenAI, Google...
 - Ex: [langchain4j](https://github.com/langchain4j/langchain4j)
@@ -64,11 +65,12 @@ Réponse du modèle : "Il était une fois un chat qui avait des ailes argentées
 
 ### **📁 Context / Contexte**
 
-Ensemble d’informations fournies au modèle au moment où il doit générer une réponse.
+- Ensemble d’informations fournies au modèle au moment où il doit générer une réponse.
+- Le contexte est stateless : chaque requête doit inclure les infos utiles.
+- Exemple : historique de conversation, documents, rôle utilisateur, etc.
 
-- Le contexte est stateless → chaque requête doit inclure les infos utiles.
-- Peut inclure : historique de conversation, documents, rôle utilisateur, etc.
-
+---
+hideInToc: true
 ---
 
 # Quelques définitions
@@ -80,25 +82,18 @@ Ensemble d’informations fournies au modèle au moment où il doit générer un
 
 ### **🌡️ Température**
 
-- La température est un paramètre qui contrôle le degré de créativité ou de randomness dans la génération de texte par
+- La température est un paramètre qui contrôle le degré de créativité ou "d'aléatoire" dans la génération de texte par
   un modèle de langage.
 
 ---
-
-# Disclaimer
-
-- Ceci n'est pas une presentation sur le fonctionnement de l'IA
-- Domaine qui évolue vite (notions obselètes dans quelques temps ?)
-
----
 layout: image-right
-image: resources/img/img.png
+image: resources/img/spring-ai.png
 backgroundSize: contain
 ---
 
 # Spring AI
 
-- Module pour l'IA Générative
+- Module Spring pour l'IA Générative
 - Support multi-providers : OpenAI, Google, Mistral, Ollama ...
 - Support multi-modèles
 - Features
@@ -106,15 +101,23 @@ backgroundSize: contain
     - Tools calling
     - MCP
     - ...
-- v1.0.0 mai 2025
+- v1.0.0 (mai 2025)
 
 ---
 
-# Chat API
+# Chat Client API
 
 - API fluent pour la communication avec un modèle
-- system
-- user
+- Envoi de prompts
+
+```java {all}{class:'!children:text-lg'}
+String askQuestion() {
+  return chatClient.prompt()
+          .user("Hello bot !")
+          .call()
+          .content();
+}
+```
 
 ---
 hideInToc: true
@@ -143,19 +146,41 @@ backgroundSize: contain
 - ⚠ Tente de peupler l'objet quoi qu'il arrive (pas d'exception lancée) prévoir des fallback
 
 ---
+layout: image-right
+image: resources/img/tool-call.png
+backgroundSize: contain
+---
 
 # Tool Calling
 
-- Lecture/écriture
-- Evidemment, attention
+- Récupération d'information
+- Action
+
+```java
+class DateTimeTools {
+  
+  @Tool(description = """
+      Get the current date and time
+      in the user's timezone
+      """)
+  String getCurrentDateTime() {
+    return LocalDateTime.now()
+            .atZone(LocaleContextHolder
+                    .getTimeZone()
+                    .toZoneId())
+            .toString();
+  }
+}
+```
 
 ---
 
 # Advisors
 
-- Mémoire
-- Monitoring
-    - SimpleLoggerAdvisor
+- Intercepteurs
+- Exemples :
+    - Monitoring
+    - Mémoire
 
 ---
 
@@ -170,21 +195,27 @@ backgroundSize: contain
 - Docker Model Runner
 
 ---
+layout: image-right
+image: resources/img/mcp.png
+backgroundSize: contain
+---
 
 # MCP - Model Context Protocol
 
-- > Like an USB port for AI applications
+> Like an USB port for AI applications
+
 - Lancé par Anthropic
-- Protocole pour fournir du contexte
+- Protocole pour fournir du contexte au modèle
+- Exemples : fetch page web, API, file system, bases de données...
 - SDK multi-langage (Java, TypeScript, Python ...)
-- Fetch page web, API, file system, bases de données...
 
 ---
 
-# Sécurité ?
+# Et aussi...
 
-- protection de prompt
--
+- Observabilité
+- Recherche sémantique
+- RAG (Retrieval Augmented Generation) : récupération d'information
 
 ---
 
@@ -192,12 +223,18 @@ backgroundSize: contain
 
 - Chat bot, aide utilisateur
 - Classification de données
+- Recherche sémantique
 - ...
 
 ---
+hideInToc: true
+layout: center
+---
 
-# Et aussi...
+<style>
+h1 {
+  font-weight: bold;
+}
+</style>
 
-- observabilité
-- Recherche sémantique
-- RAG (Retrieval Augmented Generation)
+# Merci !
