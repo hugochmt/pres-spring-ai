@@ -57,9 +57,9 @@ hideInToc: true
 - Texte que l’on envoie au modèle pour qu’il fasse quelque chose.
 - Exemple :
 
-```bash
-  Prompt : "Écris une courte histoire sur un chat qui vole."
-  Réponse du modèle : "Il était une fois un chat qui avait des ailes argentées..."
+```
+Prompt : "Écris une courte histoire sur un chat qui vole."
+Réponse du modèle : "Il était une fois un chat qui avait des ailes argentées..."
 ```
 
 ### **📁 Context / Contexte**
@@ -96,7 +96,7 @@ image: resources/img/img.png
 backgroundSize: contain
 ---
 
-# 🌱 Spring AI
+# Spring AI
 
 - Module pour l'IA Générative
 - Support multi-providers : OpenAI, Google, Mistral, Ollama ...
@@ -110,7 +110,7 @@ backgroundSize: contain
 
 ---
 
-# 💬 Chat API
+# Chat API
 
 - API fluent pour la communication avec un modèle
 - system
@@ -135,7 +135,7 @@ image: resources/img/structured_output.png
 backgroundSize: contain
 ---
 
-# 🗂️ Structured output
+# Structured output
 
 - Pas besoin de fournir le modèle en entrée (spring le fait pour nous)
 - Permet de mapper le résultat vers un objet typé
@@ -152,13 +152,14 @@ backgroundSize: contain
 ---
 
 # Advisors
+
 - Mémoire
 - Monitoring
-  - SimpleLoggerAdvisor
+    - SimpleLoggerAdvisor
 
 ---
 
-# 🦙 Ollama
+# Ollama
 
 > Docker for LLMs
 
@@ -170,16 +171,17 @@ backgroundSize: contain
 
 ---
 
-# 📶 MCP
+# MCP - Model Context Protocol
 
 - > Like an USB port for AI applications
+- Lancé par Anthropic
 - Protocole pour fournir du contexte
 - SDK multi-langage (Java, TypeScript, Python ...)
 - Fetch page web, API, file system, bases de données...
 
 ---
 
-# 🛡 Sécurité
+# Sécurité ?
 
 - protection de prompt
 -
