@@ -19,7 +19,7 @@ layout: intro
 
 # Sommaire
 
-<Toc/>
+<Toc columns="2"/>
 
 
 ---
@@ -27,8 +27,9 @@ layout: intro
 # Contexte
 
 - Essor de l'utilisation des IAs génératives depuis quelques années (ChatGPT, Claude, Midjourney ...)
-- Révolution du prompt ➡ on peut définir sa demande en langage naturel
-- Lancement de frameworks et librairies pour faciliter l'utilisation des LLMs, autour des APIs OpenAI, Google, etc.
+- Révolution du prompt : on peut définir sa demande en langage naturel
+- Lancement de frameworks et librairies pour faciliter l'utilisation des LLMs, autour des APIs OpenAI, Google...
+- Ex: [langchain4j](https://github.com/langchain4j/langchain4j)
 
 ---
 
@@ -37,7 +38,7 @@ layout: intro
 ### **🧠 Modèle**
 
 - Un modèle est un programme d’intelligence artificielle qui a appris à accomplir une tâche à partir de données
-- Exemple : comprendre du texte, générer des réponses, traduire ...
+- Exemple : comprendre du texte, générer des images, traduire...
 
 ### **🗣️ LLM (Large Language Model)**
 
@@ -46,6 +47,10 @@ layout: intro
 - Exemple : GPT-3, GPT-4, Mistral_7B (ChatGPT ≠ GPT-3)
 
 ---
+hideInToc: true
+---
+
+# Quelques définitions
 
 ### **📝 Prompt**
 
@@ -60,12 +65,13 @@ layout: intro
 ### **📁 Context / Contexte**
 
 Ensemble d’informations fournies au modèle au moment où il doit générer une réponse.
+
 - Le contexte est stateless → chaque requête doit inclure les infos utiles.
 - Peut inclure : historique de conversation, documents, rôle utilisateur, etc.
 
 ---
 
-# Mais aussi
+# Quelques définitions
 
 ### **🧩 Token**
 
@@ -82,7 +88,7 @@ Ensemble d’informations fournies au modèle au moment où il doit générer un
 # Disclaimer
 
 - Ceci n'est pas une presentation sur le fonctionnement de l'IA
-- Domaine qui évolue vite (obsolescence, nouvelles technologies, ...)
+- Domaine qui évolue vite (notions obselètes dans quelques temps ?)
 
 ---
 layout: image-right
@@ -111,6 +117,7 @@ backgroundSize: contain
 - user
 
 ---
+hideInToc: true
 layout: center
 ---
 
@@ -144,17 +151,15 @@ backgroundSize: contain
 
 ---
 
-# Mémoire
-
----
-
-# Monitoring
-
-- SimpleLoggerAdvisor
+# Advisors
+- Mémoire
+- Monitoring
+  - SimpleLoggerAdvisor
 
 ---
 
 # 🦙 Ollama
+
 > Docker for LLMs
 
 - Modèles sur Hugging Face
@@ -163,16 +168,14 @@ backgroundSize: contain
 - ⚠ Certains modèles peuvent mal supporter les structured output
 - Docker Model Runner
 
-
 ---
 
-# ᯤ MCP
+# 📶 MCP
+
 - > Like an USB port for AI applications
 - Protocole pour fournir du contexte
 - SDK multi-langage (Java, TypeScript, Python ...)
 - Fetch page web, API, file system, bases de données...
-
-
 
 ---
 
@@ -187,7 +190,6 @@ backgroundSize: contain
 
 - Chat bot, aide utilisateur
 - Classification de données
-- Recherche sémantique
 - ...
 
 ---
@@ -195,6 +197,5 @@ backgroundSize: contain
 # Et aussi...
 
 - observabilité
-- RAG
-- MCP Model Context Protocol
-- 🦜 [langchain4j](https://github.com/langchain4j/langchain4j)
+- Recherche sémantique
+- RAG (Retrieval Augmented Generation)
