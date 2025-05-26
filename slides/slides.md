@@ -175,12 +175,10 @@ class DateTimeTools {
 
 ---
 
-# Advisors
+# Mémoire
 
-- Intercepteurs
-- Exemples :
-    - Monitoring
-    - Mémoire
+- Advisors : intercepteurs
+- InMemory, Jdbc, Base vectorielle...
 
 ---
 
@@ -204,10 +202,11 @@ backgroundSize: contain
 
 > Like an USB port for AI applications
 
-- Lancé par Anthropic
 - Protocole pour fournir du contexte au modèle
+- Lancé par Anthropic
 - Exemples : fetch page web, API, file system, bases de données...
 - SDK multi-langage (Java, TypeScript, Python ...)
+- SSE, Stdio
 
 ---
 
