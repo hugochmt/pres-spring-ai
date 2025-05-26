@@ -1,19 +1,33 @@
 <div class="flex flex-col h-screen bg-orange-100 px-36">
   <div class="flex-grow overflow-y-auto p-4 space-y-4" id="chat-container">
     @for (message of messages; track $index) {
+      @if (message.author == 'ai') {
+        <img
+          src="https://www.serieously.com/app/uploads/2024/05/franck-pitiot-kaamelott-perceval.jpg"
+          alt="Bot"
+          class="w-8 h-8 rounded-full mr-2 object-cover"
+        />
+      }
       <div
-        class="max-w-lg px-4 py-2 rounded-lg shadow-lg"
-        class="{{ message.author == 'user' ? 'ml-auto bg-emerald-200' : 'mr-auto bg-amber-100' }}"
+        class="max-w-2/3 w-fit px-4 py-2 rounded-lg shadow-lg"
+        class="{{
+          message.author == 'user' ? 'ml-auto bg-amber-100' : 'mr-auto bg-amber-50 font-mono'
+        }}"
       >
         {{ message.content }}
       </div>
     }
 
     @if (isLoading) {
+      <img
+        src="https://www.serieously.com/app/uploads/2024/05/franck-pitiot-kaamelott-perceval.jpg"
+        alt="Bot"
+        class="w-8 h-8 rounded-full mr-2 object-cover"
+      />
       <div
-        class="max-w-xs px-4 py-2 rounded-lg shadow-lg mr-auto bg-gray-300 text-sm text-gray-700 italic"
+        class="max-w-xs px-4 py-2 rounded-lg shadow-lg mr-auto bg-amber-50 text-sm text-gray-700 italic"
       >
-        Loading...
+        ...
       </div>
     }
   </div>
